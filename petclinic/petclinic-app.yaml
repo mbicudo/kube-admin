@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petclinic
+spec:
+  selector:
+    matchLabels:
+      run: petclinic
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: petclinic
+    spec:
+      containers:
+      - name: petclinic
+        image: docker.io/sionsmith/spring-petclinic
+        ports:
+        - containerPort: 8080
+        env:
+        - name: LD_PRELOAD
+          value: "/opt/Panorama/
+
