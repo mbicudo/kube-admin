@@ -12,6 +12,10 @@ spec:
       labels:
         run: petclinic
     spec:
+      volumes:
+      - name: appinternals
+        hostPath:
+          path: "/opt/Panorama"
       containers:
       - name: petclinic
         image: docker.io/sionsmith/spring-petclinic
@@ -19,5 +23,8 @@ spec:
         - containerPort: 8080
         env:
         - name: LD_PRELOAD
-          value: "/opt/Panorama/
+          value: "/opt/Panorama/hedzup/mn/lib64/librpil.so"
+        volumeMounts:
+        - name: appinternals
+          mountPath: "/opt/Panorama"
 

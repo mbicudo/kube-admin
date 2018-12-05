@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jpetstore-deploy
+spec:
+  selector:
+    matchLabels:
+      app: jpetstore-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jpetstore-app
+    spec:
+     containers:
+     - name: jpetstore
+       image: mddb/myjpetstore
+       ports:
+       - containerPort: 8080
+       env:
+       - name: MYPET_DBHOST
+         value: "172.17.0.9"
+       - name: MYPET_DBPORT
+         value: "3306"
+       - name: MYPET_DATABASE
+         value: "jpetstore"
+       - name: MYPET_USERNAME
+         value: "jpetstore"
+       - name: MYPET_PASSWD
+         value: "jpetstore"
+       - name: LD_PRELOAD
+         value: "/opt/Panorama/hedzup/mn/lib64/librpil.so"
+       volumeMounts:
+       - name: appinternals
+         mountPath: "/opt/Panorama"
+     volumes:
+     - name: appinternals
+       hostPath:
+         path: "/opt/Panorama"

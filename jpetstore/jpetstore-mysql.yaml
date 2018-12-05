@@ -1,0 +1,39 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: mysql-jpet-deploy
+spec:
+  selector:
+    matchLabels:
+      app: mysql-jpet-app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql-jpet-app
+    spec:
+      containers:
+      - image: mysql:5.6
+        name: mysql-jpet-container
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: jpetstore
+        - name: MYSQL_DATABASE
+          value: jpetstore
+        - name: MYSQL_USER
+          value: jpetstore
+        - name: MYSQL_PASSWORD
+          value: jpetstore
+        - name: MYSQL_ROOT_PASSWORD
+          value: jpetstore
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-jpet-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-jpet-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-jpet-pv-claim
