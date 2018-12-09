@@ -32,15 +32,9 @@ Create the MySQL Service
   $ kubectl apply -f jpetstore-mysql-svc.yaml
   ```
 
-After deploying, check the endpoint IP of the MySQL Service:
-  ```
-  $ kubectl describe service mysql-jpet-service |grep Endpoints
-  Endpoints:         172.17.0.9:3306
-  ```
-
 Connect to MySQL (using the service's endpoint IP) to create the initial DB
   ```
-  $ kubectl run -i --rm --image=mysql:5.6 --restart=Never mysql-jpet-client -- mysql -h 172.17.0.9 -u jpetstore -pjpetstore < jpetstore.sql
+  $ kubectl run -i --rm --image=mysql:5.6 --restart=Never mysql-jpet-client -- mysql -h mysql-jpet-service -D jpetstore -u jpetstore -pjpetstore < jpetstore.sql
   ```
 
 - JPetStore
@@ -51,8 +45,11 @@ Deploy JPetStore App and Service:
   $ kubectl apply -f jpetstore-svc.yaml
   ```
 
-I should have used DNS for the mysql but since kube-dns got wrecked and I stil have to fix it I had to modify YAML file with MySQL Service ClusterIP and patch or modify the jpetstore deployment YAML accordingly.
-  ```
-  $ 
-  ```
+kube-dns or coredns not working?
 
+After deploying, check the endpoint IP of the MySQL Service:
+  ```
+  $ kubectl describe service mysql-jpet-service |grep Endpoints
+  Endpoints:         172.17.0.9:3306
+  
+And edit jpetstore-app.yaml accordingly.
