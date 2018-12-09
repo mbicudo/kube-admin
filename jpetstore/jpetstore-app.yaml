@@ -19,7 +19,7 @@ spec:
        - containerPort: 8080
        env:
        - name: MYPET_DBHOST
-         value: "172.17.0.9"
+         value: "mysql-jpet-service"
        - name: MYPET_DBPORT
          value: "3306"
        - name: MYPET_DATABASE
