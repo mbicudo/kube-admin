@@ -1,20 +1,20 @@
 # PetStore on Kubernetes
-=================
 
-## Pre-requisites
-* Tested on 
+## TLDN
+
+## Pre-requisite
+Tested on 
 * CentOS 7.5
 * Docker 18.06.1
-* minikube 0.30
-* kubectl-1.12.2-0
+* kubectl 1.13
 
 
 ## MySQL Deployment & Service
 
 This deployment is based on 
-* [mddb/myjpetstore] (https://hub.docker.com/r/mddb/myjpetstore/)
+* [mddb/myjpetstore]: https://hub.docker.com/r/mddb/myjpetstore/
   * Based on centos7 & iBatis JPetStore
-* [mysql] 5.6 (https://hub.docker.com/_/mysql/)
+* [mysql]: https://hub.docker.com/_/mysql/ 5.6 
 
 
 Create MySQL PV and PVC
@@ -37,7 +37,7 @@ Connect to MySQL (using the service's endpoint IP) to create the initial DB
   $ kubectl run -i --rm --image=mysql:5.6 --restart=Never mysql-jpet-client -- mysql -h mysql-jpet-service -D jpetstore -u jpetstore -pjpetstore < jpetstore.sql
   ```
 
-- JPetStore
+### JPetStore
 Create MySQL PV and PVC
 Deploy JPetStore App and Service:
   ```
@@ -45,7 +45,7 @@ Deploy JPetStore App and Service:
   $ kubectl apply -f jpetstore-svc.yaml
   ```
 
-kube-dns or coredns not working?
+### kube-dns or coredns not working?
 
 After deploying, check the endpoint IP of the MySQL Service:
   ```
