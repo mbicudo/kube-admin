@@ -66,4 +66,4 @@ After deploying, check the endpoint IP of the MySQL Service:
   Endpoints:         172.17.0.9:3306
   ```
 
-And edit jpetstore-app.yaml accordingly.
+And edit jpetstore-app.yaml accordingly. By doing this, you will by pass DNS and use the IP directly.
