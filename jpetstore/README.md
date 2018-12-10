@@ -12,10 +12,12 @@ Tested on
 ## MySQL Deployment & Service
 
 This deployment is based on 
-* [mddb/myjpetstore]: https://hub.docker.com/r/mddb/myjpetstore/
+* [mddb/myjpetstore]
   * Based on centos7 & iBatis JPetStore
-* [mysql]: https://hub.docker.com/_/mysql/ 5.6 
+* [mysql] 5.6 
 
+[mddb/myjpetstore]: https://hub.docker.com/r/mddb/myjpetstore/
+[mysql]: https://hub.docker.com/_/mysql/
 
 Create MySQL PV and PVC
   ```
@@ -51,5 +53,6 @@ After deploying, check the endpoint IP of the MySQL Service:
   ```
   $ kubectl describe service mysql-jpet-service |grep Endpoints
   Endpoints:         172.17.0.9:3306
-  
+  ```
+
 And edit jpetstore-app.yaml accordingly.
