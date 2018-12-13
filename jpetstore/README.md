@@ -3,7 +3,7 @@
 ## TLDN
   ```
   git clone https://github.com/mbicudo/kube-admin/
-  cd jpetstore
+  cd kube-admin/jpetstore
   kubectl apply -f jpetstore-mysql-pv.yaml
   kubectl apply -f jpetstore-mysql.yaml
   kubectl apply -f jpetstore-mysql-svc.yaml
@@ -11,7 +11,6 @@
   kubectl apply -f jpetstore-app.yaml
   kubectl apply -f jpetstore-svc.yaml
   ```
-
 
 ## Pre-requisite
 Tested on:
