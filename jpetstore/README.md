@@ -14,10 +14,12 @@
 
 
 ## Pre-requisite
-Tested on 
+Tested on:
 * CentOS 7.5
 * Docker 18.06.1
 * kubectl 1.13
+
+### Assigning Pods and Node Labels
 
 I am using node labels to assign pods to different nodes, but you can obviously assign the app and mysql to the same node.
 Just make sure your nodes have the labels for mysql and jpetstore.
@@ -41,7 +43,7 @@ This deployment is based on
 [mddb/myjpetstore]: https://hub.docker.com/r/mddb/myjpetstore/
 [mysql]: https://hub.docker.com/_/mysql/
 
-Create MySQL PV and PVC
+Create MySQL PV and PVC:
   ```
   kubectl apply -f jpetstore-mysql-pv.yaml
   ```
@@ -56,13 +58,18 @@ Create the MySQL Service
   kubectl apply -f jpetstore-mysql-svc.yaml
   ```
 
-Connect to MySQL (using the service's endpoint IP) to create the initial DB
+Connect to MySQL Service to confirm it is working fine:
+  ```
+  $ kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-jpet-client -- mysql -h mysql-jpet-service -u jpetstore -pjpetstore
+  mysql>
+  ```
+
+You shoudl be fine if you see 'mysql>'. Then create the initial DB:
   ```
   kubectl run -i --rm --image=mysql:5.6 --restart=Never mysql-jpet-client -- mysql -h mysql-jpet-service -D jpetstore -u jpetstore -pjpetstore < jpetstore.sql
   ```
 
 ### JPetStore
-Create MySQL PV and PVC
 Deploy JPetStore App and Service:
   ```
   kubectl apply -f jpetstore-app.yaml
